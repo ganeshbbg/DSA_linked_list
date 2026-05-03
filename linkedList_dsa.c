@@ -23,9 +23,25 @@ void create_list(linkedlist **list, uint8_t a_data);
 void reverse_transversal(linkedlist *list);
 void insert_node(linkedlist *list,int a_data,int pos);
 void delete_node(linkedlist *list, int pos);
+linkedlist *Return_middle_node(linkedlist *list);
 /************************END_OF_PROTOTYE*********************************/
 
+linkedlist *Return_middle_node(linkedlist *list){
+    linkedlist *temp = list,*temp_1 = list,*mid_node = NULL,*fast = list->next,*slow = list->next;;
+    
+    temp = temp->next;
+    printf("\n return middle node");
 
+    
+    if(list == NULL || list->next == NULL){
+        return NULL;
+    }
+    while(fast != NULL && fast->next != NULL){
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
 void delete_node(linkedlist *list, int pos)
 {
     linkedlist *curr = NULL ;
@@ -55,6 +71,7 @@ void insert_node(linkedlist *list,int a_data,int pos)
     linkedlist *cur = NULL, *temp = list, *new_1 = NULL;
     int cnt = 0;
     printf("\n insert node @ = %d", pos);
+    
     if(pos == 0)
     {
         new_1 = (linkedlist *)(malloc(sizeof(linkedlist)));
@@ -139,14 +156,18 @@ int main(void){
         temp = node;
     }
 
-    insert_node(head, 12, 0);
     temp = head;
     fwd_tranversal(temp);
-    delete_node(head, 6);
-    temp = head;
-    fwd_tranversal(temp);
-    temp = head;
-    reverse_transversal(temp);
+    temp = Return_middle_node(head);
+    printf("\n middele node = %d", temp->data);
+    // insert_node(head, 12, 0);
+    // temp = head;
+    // fwd_tranversal(temp);
+    // delete_node(head, 6);
+    // temp = head;
+    // fwd_tranversal(temp);
+    // temp = head;
+    // reverse_transversal(temp);
     
 }
 
